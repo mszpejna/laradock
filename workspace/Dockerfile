@@ -1044,6 +1044,10 @@ RUN if [ ${INSTALL_SYMFONY} = true ]; then \
 # PYTHON:
 ###########################################################################
 
+RUN apt-get install software-properties-common
+RUN apt-add-repository universe
+RUN apt-get update
+
 ARG INSTALL_PYTHON=false
 
 RUN if [ ${INSTALL_PYTHON} = true ]; then \

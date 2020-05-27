@@ -5,7 +5,8 @@ networks:
     driver: ${NETWORKS_DRIVER}
   backend:
     driver: ${NETWORKS_DRIVER}
-
+  ress:
+    driver: ${NETWORKS_DRIVER}
 volumes:
   mysql:
     driver: ${VOLUMES_DRIVER}
@@ -163,8 +164,11 @@ services:
         - DOCKER_TLS_CERTDIR=/certs
         - DOCKER_CERT_PATH=/certs/client
       networks:
-        - frontend
-        - backend
+        frontend:
+        backend:
+        ress:
+            aliases:
+              - workspace.local
       links:
         - docker-in-docker
 
@@ -348,8 +352,12 @@ services:
       depends_on:
         - php-fpm
       networks:
-        - frontend
-        - backend
+        frontend:
+        backend:
+        ress:
+          aliases:
+            - cms.ress.local
+            - ress.local
 
 ### Blackfire ########################################
     blackfire:
